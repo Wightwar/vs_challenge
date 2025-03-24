@@ -41,8 +41,8 @@ def plot_training_loss(training_loss, validation_loss):
     """
     epochs = range(1, len(training_loss) + 1)
 
-    plt.plot(epochs, training_loss, 'bo', label='Training loss')
-    plt.plot(epochs, validation_loss, 'b', label='Validation loss')
+    plt.plot(epochs, training_loss, color='blue', linestyle='-', label='Training loss')
+    plt.plot(epochs, validation_loss, color='green', linestyle='--', label='Validation loss')
     plt.xlabel('epochs')
     plt.title('Training and validation loss')
     plt.legend()
@@ -65,7 +65,7 @@ def plot_power_time(y_test, y_pred=np.array([]), y_baseline_pred=np.array([])):
         plt.plot(y_pred, label="Predicted Power Consumption", color="red", linestyle="dashed")
     if y_baseline_pred.size != 0:
         plt.plot(y_baseline_pred, label="Baseline Predicted Power Consumption", color="green", linestyle="dashed")
-    plt.xlabel("Time")
+    plt.xlabel("Time [hours]")
     plt.ylabel("Power Consumption")
     plt.legend()
     plt.show()
