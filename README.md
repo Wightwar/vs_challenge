@@ -1,5 +1,4 @@
 # VisionSpace Challenge Repo
---
 
 This repository containts the entire solution for the VisionSpace Challenge
 
