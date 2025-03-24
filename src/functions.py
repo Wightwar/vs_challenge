@@ -10,9 +10,10 @@ def create_sequences(data, target_column, sequence_length=5):
     return np.array(x), np.array(y)
 
 def calc_corr_of_feature(df, features, target):
+    target_shifted = df[target].shift(-1) # Shift target to have next-hour correlation
     for feature in features:
-        event_correlations = df[target].corr(df[feature])
-        print(feature, "corr:", event_correlations)
+        correlations = df[feature].corr(target_shifted)
+        print(feature, "corr:", correlations)
 
 def plot_training_loss(training_loss, validation_loss):
     epochs = range(1, len(training_loss) + 1)
