@@ -1,35 +1,35 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def create_sequences(data, target_column, sequence_length=5):
+def create_sequences(data, label_feature_column, sequence_length=5):
     """This function creates a sequence of lengt n from given data.
 
     Args:
         data (ndarray): The raw data where the sequence should be created from.
-        target_column (int): Index of the target column.
+        label_feature_column (int): Index of the label feature column.
         sequence_length (int): Length of the sequence that should be created. Defaults to 5.
 
     Returns:
-        ndarray: An array containing the input data called x and an array containing the target data y.
+        ndarray: An array containing the input data called x and an array containing the label feature data y.
     """
     x, y = [], []
     for i in range(len(data) - sequence_length):
         x.append(data[i:i+sequence_length]) # Last 5 hours as input
-        y.append(data[i+sequence_length, target_column]) # Next hour as target
+        y.append(data[i+sequence_length, label_feature_column]) # Next hour as label feature
     
     return np.array(x), np.array(y)
 
-def calc_corr_of_feature(df, features, target):
-    """This function calculates the linear correlation between a list of features and the target.
+def calc_corr_of_feature(df, features, label_feature):
+    """This function calculates the linear correlation between a list of features and the label feature.
 
     Args:
         df (DataFrame): A data frame containing the values.
         features (list[string]): A list of strings with features.
-        target (list[string]): A list of strings with the target.
+        label_feature (list[string]): A list of strings with the label feature.
     """
-    target_shifted = df[target].shift(-1) # Shift target to have next-hour correlation
+    label_feature_shifted = df[label_feature].shift(-1) # Shift label feature to have next-hour correlation
     for feature in features:
-        correlations = df[feature].corr(target_shifted)
+        correlations = df[feature].corr(label_feature_shifted)
         print(feature, "corr:", correlations)
 
 def plot_training_loss(training_loss, validation_loss):
